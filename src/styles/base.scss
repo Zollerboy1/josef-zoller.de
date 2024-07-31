@@ -1,10 +1,10 @@
 $headings:
-    2.25 700,
-    1.75 600,
-    1.5 500,
-    1.25 400,
-    1 400,
-    1 400;
+    1.75 2.25 700,
+    1.5 1.75 600,
+    1.25 1.5 500,
+    1 1.25 400,
+    1 1 400,
+    1 1 400;
 
 $code-color: #f0506e;
 $comment-color: #6a737d;
@@ -79,15 +79,20 @@ $dark-accent-color: #083344;
     }
 
     @for $i from 1 through length($headings) {
-        $size: nth(nth($headings, $i), 1);
-        $weight: nth(nth($headings, $i), 2);
+        $size-sm: nth(nth($headings, $i), 1);
+        $size: nth(nth($headings, $i), 2);
+        $weight: nth(nth($headings, $i), 3);
 
         h#{$i} {
-            font-size: $size + rem;
+            font-size: $size-sm + rem;
             font-weight: $weight;
 
             &:not(:first-child) {
                 margin-top: 1.25em;
+            }
+
+            @media (min-width: 640px) {
+                font-size: $size + rem;
             }
         }
     }

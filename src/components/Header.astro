@@ -69,10 +69,16 @@ const socialMedia = [
     <nav
         class="w-full max-w-screen-lg mx-auto p-5 flex items-center justify-between"
     >
-        <a href="/" class={`text-xl font-bold ${LinkClass.Active}`}>
+        <a
+            href="/"
+            class={`hidden sm:block text-xl font-bold ${LinkClass.Active}`}
+        >
             Josef Zoller
         </a>
-        <ul class="inline-flex items-center gap-5">
+        <a href="/" class={`sm:hidden text-xl font-bold ${LinkClass.Active}`}>
+            JZ
+        </a>
+        <ul class="inline-flex items-center gap-3 sm:gap-5">
             {
                 navigation.map((page) => (
                     <li>
@@ -83,7 +89,7 @@ const socialMedia = [
                 ))
             }
         </ul>
-        <ul class="inline-flex items-center gap-5">
+        <ul class="inline-flex items-center gap-3 sm:gap-5">
             {
                 socialMedia.map(({ url, icon, title }) => (
                     <li>

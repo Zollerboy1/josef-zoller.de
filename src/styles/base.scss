@@ -46,8 +46,9 @@ $dark-accent-color: #083344;
     }
 }
 
-#header {
-    animation: 60s header-animation;
+#header,
+#footer {
+    animation: 60s header-animation infinite running;
     background-image: linear-gradient(
         to right,
         lighten($light-accent-color, 20%),
@@ -66,16 +67,14 @@ $dark-accent-color: #083344;
 }
 
 #content {
+    min-height: calc(100vh - 10rem);
+
     *:not([class*='leading']) {
         line-height: 1.3;
     }
 
     & > :not(:last-child) {
         margin-bottom: 1rem;
-    }
-
-    & > :last-child {
-        margin-bottom: 2rem;
     }
 
     @for $i from 1 through length($headings) {

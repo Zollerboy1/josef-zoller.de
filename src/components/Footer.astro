@@ -1,0 +1,43 @@
+---
+import { Icon } from 'astro-icon/components'
+import { LinkClass } from '../lib/common'
+
+const footerNavigation = [
+    {
+        title: 'Home',
+        url: '/',
+    },
+    {
+        title: 'Contact',
+        url: '/contact',
+    },
+    {
+        title: 'Privacy',
+        url: '/privacy',
+    },
+]
+---
+
+<footer class="w-full h-20 flex" id="footer">
+    <nav
+        class="w-full max-w-screen-lg m-auto px-5 flex items-center justify-between"
+    >
+        <ul class="inline-flex items-center gap-3 sm:gap-5">
+            {
+                footerNavigation.map((page) => (
+                    <li>
+                        <a href={page.url} class={LinkClass.Default}>
+                            {page.title}
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+        <div class="inline-flex items-center gap-0.5 h-5 text-gray-500">
+            <Icon name="mdi:copyright" title="Copyright sign" />
+            <p>
+                {new Date().getFullYear()} Josef Zoller
+            </p>
+        </div>
+    </nav>
+</footer>

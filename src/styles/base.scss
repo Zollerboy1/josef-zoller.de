@@ -119,7 +119,15 @@ $dark-accent-color: #083344;
 
     & > img,
     & > p > img {
-        margin: 2rem auto;
+        margin-top: 2rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    & > img:not(:last-child),
+    & > p:not(:last-child) > img,
+    & > p > img:not(:last-child) {
+        margin-bottom: 2rem;
     }
 
     & > ul,

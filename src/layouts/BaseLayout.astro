@@ -1,17 +1,37 @@
 ---
+import type { ImageMetadata } from 'astro'
+import type { BaseProps } from '../lib/types'
+import { getImage } from 'astro:assets'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+
 import '@fontsource/fira-sans'
 import '@fontsource/fira-mono'
 
 import '../styles/base.scss'
 
-import Header from '../components/Header.astro'
-import Footer from '../components/Footer.astro'
+type Props = BaseProps
 
-interface Props {
-    title: string
+const { title, description, ogType = 'website', ogImage, ogUrl } = Astro.props
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+    '/src/images/*.{jpeg,jpg,png,gif}'
+)
+
+let ogImageSrc: string | undefined
+if (ogImage) {
+    if (!images[ogImage])
+        throw new Error(
+            `"${ogImage}" does not exist in glob: "/src/images/*.{jpeg,jpg,png,gif}"`
+        )
+
+    const optimizedOgImage = await getImage({
+        src: images[ogImage](),
+        format: 'webp',
+    })
+
+    ogImageSrc = optimizedOgImage.src
 }
-
-const { title } = Astro.props
 ---
 
 <!doctype html>
@@ -20,6 +40,17 @@ const { title } = Astro.props
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{title} - josef-zoller.de</title>
+        <meta name="description" content={description} />
+        <meta name="author" content="Josef Zoller" />
+        <meta name="generator" content={Astro.generator} />
+        <meta
+            property="og:title"
+            content={`${title} - Josef Zoller's personal website`}
+        />
+        <meta property="og:description" content={description} />
+        <meta property="og:type" content={ogType} />
+        {ogImageSrc && <meta property="og:image" content={ogImageSrc} />}
+        {ogUrl && <meta property="og:url" content={ogUrl} />}
         <link
             rel="apple-touch-icon"
             sizes="180x180"

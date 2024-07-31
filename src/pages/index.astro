@@ -7,7 +7,11 @@ import { Content } from '../components/index.md'
 const blogPosts = await getBlogPosts(3)
 ---
 
-<BaseLayout title="Home">
+<BaseLayout
+    title="Home"
+    description="Welcome to my personal website!"
+    ogImage="/src/images/cat.jpg"
+>
     <Content />
     <h2>Latest Blog Posts</h2>
     <BlogCards posts={blogPosts} titleTag="h3" />

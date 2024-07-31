@@ -1,6 +1,7 @@
 ---
 layout: '../layouts/MarkdownLayout.astro'
 title: About Me
+description: "Learn more about me, Josef Zoller, a software developer from Germany."
 navigation:
     title: About Me
     order: 1

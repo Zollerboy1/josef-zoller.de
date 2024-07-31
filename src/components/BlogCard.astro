@@ -16,7 +16,7 @@ const { post, titleTag = 'h2' } = Astro.props
         title={post.frontmatter.title}
         date={post.frontmatter.date}
         titleClass="text-gray-600 group-hover:text-black dark:text-white dark:group-hover:text-gray-300"
-        titleTag={titleTag}
+        {titleTag}
     />
     <p
         class="text-gray-600 group-hover:text-black dark:text-white dark:group-hover:text-gray-300 my-5"

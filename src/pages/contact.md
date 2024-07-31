@@ -1,6 +1,7 @@
 ---
 layout: ../layouts/MarkdownLayout.astro
 title: Contact
+description: "Contact me, Josef Zoller, a software developer from Germany."
 ---
 
 # Contact

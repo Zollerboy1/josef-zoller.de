@@ -23,14 +23,17 @@ function classForLink(url: string | undefined): LinkClass {
 const markdownPages =
     await Astro.glob<Frontmatter<Navigation | undefined>>('/src/pages/*.md')
 
-const htmlImports = import.meta.glob('/src/pages/*.astro', {
-    import: 'navigation',
-})
+const htmlImports = import.meta.glob<Navigation | undefined>(
+    '/src/pages/*.astro',
+    {
+        import: 'navigation',
+    }
+)
 
 const htmlPages = (
     await Promise.all(
-        Object.entries(htmlImports).map(async ([path, promise]) => {
-            const navigation = (await promise()) as Navigation | undefined
+        Object.entries(htmlImports).map(async ([path, fn]) => {
+            const navigation = await fn()
 
             const url = path.replace('/src/pages', '').replace('.astro', '')
 

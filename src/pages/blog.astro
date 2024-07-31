@@ -12,7 +12,7 @@ export const navigation: Navigation = {
 const blogPosts = await getBlogPosts(5)
 ---
 
-<BaseLayout title="Blog">
+<BaseLayout title="Blog" description="Read my latest blog posts">
     <h1>Blog</h1>
     <BlogCards posts={blogPosts} />
     {

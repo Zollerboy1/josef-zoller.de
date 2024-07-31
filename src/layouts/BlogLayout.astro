@@ -12,6 +12,6 @@ const dateObj = new Date(date)
 ---
 
 <MarkdownLayout {...Astro.props}>
-    <BlogTitle title={title} date={dateObj} />
+    <BlogTitle {title} date={dateObj} />
     <slot />
 </MarkdownLayout>

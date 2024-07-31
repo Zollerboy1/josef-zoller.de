@@ -1,6 +1,7 @@
 ---
 layout: ../layouts/MarkdownLayout.astro
 title: Privacy Policy
+description: "Learn more about how I handle your data and protect your privacy."
 ---
 
 # Privacy Policy

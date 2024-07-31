@@ -74,9 +74,19 @@ const pagination: PaginationEntry[] = [
         title: 'Go to last page',
     },
 ]
+
+let description
+if (page.data.length > 0) {
+    const startDate = page.data[page.data.length - 1].frontmatter.date
+    const endDate = page.data[0].frontmatter.date
+
+    description = `Read my blog posts from ${startDate.toLocaleDateString('en-US')} to ${endDate.toLocaleDateString('en-US')}`
+} else {
+    description = 'No blog posts found'
+}
 ---
 
-<BaseLayout title={`Blog posts (page ${page.currentPage})`}>
+<BaseLayout title={`Blog posts (page ${page.currentPage})`} {description}>
     <h1>Blog posts (page {page.currentPage})</h1>
     <BlogCards posts={page.data} />
     <div class="w-full flex items-center justify-center gap-1 mx-auto mt-8">

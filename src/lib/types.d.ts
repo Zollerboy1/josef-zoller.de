@@ -1,14 +1,21 @@
+export interface BaseProps {
+    title: string
+    description: string
+    ogType?: string
+    ogImage?: string
+    ogUrl?: string
+}
+
 export interface Navigation {
     title: string
     order: number
 }
 
-export interface Frontmatter<T> {
-    title: string
+export interface Frontmatter<T> extends BaseProps {
     navigation: T
 }
 
 export interface BlogFrontmatter<T> extends Frontmatter<undefined> {
-    description: string
     date: T
+    image: string
 }

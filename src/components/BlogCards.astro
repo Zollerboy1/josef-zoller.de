@@ -15,6 +15,6 @@ const { posts, titleTag = 'h2' } = Astro.props
     posts.length > 0 ? (
         posts.map((post) => <BlogCard post={post} titleTag={titleTag} />)
     ) : (
-        <p class="text-gray-500">There are no posts yet. Stay tuned...</p>
+        <p class="text-gray-500">There are no blog posts yet. Stay tuned...</p>
     )
 }

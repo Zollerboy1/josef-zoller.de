@@ -29,6 +29,7 @@ type PaginationEntry =
     | {
           url: string | undefined
           icon: string
+          title: string
       }
     | number
 
@@ -36,10 +37,12 @@ const pagination: PaginationEntry[] = [
     {
         url: page.url.first,
         icon: 'mdi:chevron-left-first',
+        title: 'Go to first page',
     },
     {
         url: page.url.prev,
         icon: 'mdi:chevron-left',
+        title: 'Go to previous page',
     },
     ...(startsAtMin
         ? []
@@ -47,6 +50,7 @@ const pagination: PaginationEntry[] = [
               {
                   url: undefined,
                   icon: 'mdi:ellipsis-horizontal',
+                  title: '...',
               },
           ]),
     ...Array.from({ length: max - min + 1 }, (_, i) => i + min),
@@ -56,15 +60,18 @@ const pagination: PaginationEntry[] = [
               {
                   url: undefined,
                   icon: 'mdi:ellipsis-horizontal',
+                  title: '...',
               },
           ]),
     {
         url: page.url.next,
         icon: 'mdi:chevron-right',
+        title: 'Go to next page',
     },
     {
         url: page.url.last,
         icon: 'mdi:chevron-right-last',
+        title: 'Go to last page',
     },
 ]
 ---
@@ -94,12 +101,16 @@ const pagination: PaginationEntry[] = [
                             href={entry.url}
                             class={`text-xl ${LinkClass.Default}`}
                         >
-                            <Icon name={entry.icon} />
+                            <Icon name={entry.icon} title={entry.title} />
                         </a>
                     )
                 } else {
                     return (
-                        <Icon name={entry.icon} class="text-xl text-gray-500" />
+                        <Icon
+                            name={entry.icon}
+                            class="text-xl text-gray-500"
+                            title={entry.title}
+                        />
                     )
                 }
             })

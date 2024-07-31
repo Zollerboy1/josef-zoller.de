@@ -111,6 +111,18 @@ $dark-accent-color: #083344;
         margin: 2rem auto;
     }
 
+    & > ul,
+    & > p > ul {
+        padding-left: 1.5rem;
+        list-style: disc;
+    }
+
+    & > ol,
+    & > p > ol {
+        padding-left: 1.5rem;
+        list-style: decimal;
+    }
+
     :not(pre) > code {
         color: $code-color;
         background-color: #f5f5f5;

@@ -43,6 +43,12 @@ export default defineConfig({
     adapter: vercel({
         webAnalytics: { enabled: true },
         imageService: true,
+        imagesConfig: {
+            sizes: [640, 750, 860, 984],
+            domains: [],
+            minimumCacheTTL: 60,
+            formats: ['image/avif', 'image/webp'],
+        },
         isr: true,
     }),
     integrations: [tailwind(), icon()],

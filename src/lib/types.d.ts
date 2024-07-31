@@ -17,5 +17,6 @@ export interface Frontmatter<T> extends BaseProps {
 
 export interface BlogFrontmatter<T> extends Frontmatter<undefined> {
     date: T
-    image: string
+    image?: string
+    imageAlt?: string
 }

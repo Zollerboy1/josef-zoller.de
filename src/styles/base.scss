@@ -49,7 +49,7 @@ $dark-accent-color: #083344;
 #header,
 #footer {
     animation: 60s header-animation infinite running;
-    background-image: linear-gradient(
+    background: linear-gradient(
         to right,
         lighten($light-accent-color, 20%),
         $light-accent-color var(--header-percentage),
@@ -57,12 +57,23 @@ $dark-accent-color: #083344;
     );
 
     @media (prefers-color-scheme: dark) {
-        background-image: linear-gradient(
+        background: linear-gradient(
             to right,
             darken($dark-accent-color, 7%),
             $dark-accent-color var(--header-percentage),
             darken($dark-accent-color, 3%)
         );
+    }
+}
+
+@-moz-document url-prefix() {
+    #header,
+    #footer {
+        background: $light-accent-color;
+
+        @media (prefers-color-scheme: dark) {
+            background: $dark-accent-color;
+        }
     }
 }
 

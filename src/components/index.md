@@ -1,6 +1,7 @@
 # Welcome to my website!
 
-I'm Josef Zoller, a software developer and computer science student from Switzerland.
+I'm Josef Zoller, a software developer and computer science student from Germany,
+currently living in Switzerland.
 
 On this website, you will find information about me and my projects,
 as well as my blog posts about random stuff that I'm working on.\

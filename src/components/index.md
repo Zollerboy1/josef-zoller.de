@@ -8,4 +8,4 @@ I hope you enjoy your stay!
 
 I don't have pictures of me on this website but here is a picture of my cat:
 
-![A (very cute) picture of my cat](/images/cat.jpg)
+![A (very cute) picture of my cat](../images/cat.jpg)

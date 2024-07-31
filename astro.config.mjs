@@ -2,8 +2,9 @@ import { defineConfig } from 'astro/config'
 import { h } from 'hastscript'
 import { fromHtml } from 'hast-util-from-html'
 import { icons } from '@iconify-json/material-symbols'
-import { getIconData, iconToSVG, iconToHTML, replaceIDs } from '@iconify/utils'
+import { getIconData, iconToSVG } from '@iconify/utils'
 
+import vercel from '@astrojs/vercel/serverless'
 import tailwind from '@astrojs/tailwind'
 import icon from 'astro-icon'
 
@@ -38,6 +39,12 @@ function hastIcon(name, spanClass, title) {
 
 // https://astro.build/config
 export default defineConfig({
+    output: 'server',
+    adapter: vercel({
+        webAnalytics: { enabled: true },
+        imageService: true,
+        isr: true,
+    }),
     integrations: [tailwind(), icon()],
     markdown: {
         shikiConfig: {

@@ -12,9 +12,11 @@
     "dependencies": {
         "@astrojs/check": "^0.8.3",
         "@astrojs/tailwind": "^5.1.0",
+        "@astrojs/vercel": "^7.7.2",
         "@fontsource/fira-mono": "^5.0.13",
         "@fontsource/fira-sans": "^5.0.20",
         "@iconify/utils": "^2.1.29",
+        "@vercel/analytics": "^1.3.1",
         "astro": "^4.12.2",
         "astro-icon": "^1.1.0",
         "hast-util-from-html": "^2.0.1",

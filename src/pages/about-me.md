@@ -10,17 +10,17 @@ navigation:
 
 # About Me
 
-My name is Josef Zoller, and I'm a software developer from Germany (although I was originally born in Switzerland, shortly before my parents moved there and I moved back here in 2021).
+My name is Josef Zoller, and I'm a software developer from Germany (although I was born in Switzerland shortly before my parents moved to Germany, and I moved back here in 2021).
 Currently, I'm studying Computer Science at *ETH Zürich*.
 
 I had been interested in programming and computer science for several years before I started studying.
 In my free time, I mostly do random projects (and never really finish them) whenever there is something new I want to try out.
 
-Especially, I'm interested in systems-level programming, like embedded systems (think ESP32 and the likes), compilers and programming languages, and distributed and decentralized networking.
+I'm especially interested in systems-level programming, like embedded systems (think ESP32 or similar), compilers and programming languages, and distributed and decentralized networking.
 But I also enjoy working as a full-stack web developer and have experience with various web technologies.
 
-My programming language of choice is still Swift, as I started learning it when I first got into programming and because it's just a really nice and beautiful language to work with.
-However, in the recent months, I've been working a lot with Rust and have come to really appreciate it as well.
+My programming language of choice is still Swift, as I started learning it when I first got into programming, and because it's just a nice and beautiful language to work with.
+However, in recent months, I've been working a lot with Rust and have come to highly appreciate it as well.
 Other languages I've worked with include Python, JavaScript, TypeScript, C, C++, C#, Java, and a few more obscure ones like Haskell.
 
 I'm a big fan of open-source software and try to contribute to projects whenever I can.

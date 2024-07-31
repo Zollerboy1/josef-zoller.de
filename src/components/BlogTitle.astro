@@ -1,0 +1,49 @@
+---
+interface Props {
+    title: string
+    date: Date
+    titleClass?: string
+    titleTag?: 'h1' | 'h2' | 'h3'
+    dateHeight?: number
+}
+
+const { title, date, titleClass = '', titleTag = 'h1' } = Astro.props
+
+const heightClasses = {
+    h1: {
+        minHeight: 'min-h-12',
+        height: 'h-12',
+        leading: 'leading-12',
+    },
+    h2: {
+        minHeight: 'min-h-9',
+        height: 'h-9',
+        leading: 'leading-9',
+    },
+    h3: {
+        minHeight: 'min-h-8',
+        height: 'h-8',
+        leading: 'leading-8',
+    },
+}
+
+const { minHeight, height, leading } = heightClasses[titleTag]
+
+const htmlString = `<${titleTag} class="${minHeight} ${leading} align-middle ${titleClass}">${title}</${titleTag}>`
+---
+
+<div class="w-full flex justify-between items-start gap-5">
+    <Fragment set:html={htmlString} />
+    <p
+        class={`text-gray-400 dark:text-gray-500 ${height} ${leading} align-middle whitespace-nowrap`}
+    >
+        {
+            date.toLocaleDateString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+            })
+        }
+    </p>
+</div>

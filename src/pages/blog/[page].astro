@@ -1,0 +1,108 @@
+---
+import type { GetStaticPaths, MarkdownInstance, Page } from 'astro'
+import type { BlogFrontmatter } from '../../lib/types'
+import { getBlogPosts } from '../../lib/blog'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import BlogCards from '../../components/BlogCards.astro'
+import { Icon } from 'astro-icon/components'
+import { LinkClass } from '../../lib/common'
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+    const blogPosts = await getBlogPosts()
+    return paginate(blogPosts, { pageSize: 10 })
+}
+
+interface Props {
+    page: Page<MarkdownInstance<BlogFrontmatter<Date>>>
+}
+
+const { page } = Astro.props
+
+let min = Math.max(page.currentPage - 1, 1)
+let max = Math.min(min + 2, page.lastPage)
+min = Math.max(max - 2, 1)
+
+const startsAtMin = min === 1
+const endsAtMax = max === page.lastPage
+
+type PaginationEntry =
+    | {
+          url: string | undefined
+          icon: string
+      }
+    | number
+
+const pagination: PaginationEntry[] = [
+    {
+        url: page.url.first,
+        icon: 'mdi:chevron-left-first',
+    },
+    {
+        url: page.url.prev,
+        icon: 'mdi:chevron-left',
+    },
+    ...(startsAtMin
+        ? []
+        : [
+              {
+                  url: undefined,
+                  icon: 'mdi:ellipsis-horizontal',
+              },
+          ]),
+    ...Array.from({ length: max - min + 1 }, (_, i) => i + min),
+    ...(endsAtMax
+        ? []
+        : [
+              {
+                  url: undefined,
+                  icon: 'mdi:ellipsis-horizontal',
+              },
+          ]),
+    {
+        url: page.url.next,
+        icon: 'mdi:chevron-right',
+    },
+    {
+        url: page.url.last,
+        icon: 'mdi:chevron-right-last',
+    },
+]
+---
+
+<BaseLayout title={`Blog posts (page ${page.currentPage})`}>
+    <h1>Blog posts (page {page.currentPage})</h1>
+    <BlogCards posts={page.data} />
+    <div class="w-full flex items-center justify-center gap-1 mx-auto mt-8">
+        {
+            pagination.map((entry) => {
+                if (typeof entry === 'number') {
+                    const linkClass =
+                        entry === page.currentPage
+                            ? LinkClass.Active
+                            : LinkClass.Default
+                    return (
+                        <a
+                            href={`/blog/${entry}`}
+                            class={`w-5 text-center ${linkClass}`}
+                        >
+                            {entry}
+                        </a>
+                    )
+                } else if (entry.url) {
+                    return (
+                        <a
+                            href={entry.url}
+                            class={`text-xl ${LinkClass.Default}`}
+                        >
+                            <Icon name={entry.icon} />
+                        </a>
+                    )
+                } else {
+                    return (
+                        <Icon name={entry.icon} class="text-xl text-gray-500" />
+                    )
+                }
+            })
+        }
+    </div>
+</BaseLayout>

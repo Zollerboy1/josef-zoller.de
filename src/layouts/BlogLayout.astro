@@ -1,0 +1,17 @@
+---
+import type { MarkdownLayoutProps } from 'astro'
+import type { BlogFrontmatter } from '../lib/types'
+import MarkdownLayout from './MarkdownLayout.astro'
+import BlogTitle from '../components/BlogTitle.astro'
+
+type Props = MarkdownLayoutProps<BlogFrontmatter<string>>
+
+const { title, date } = Astro.props.frontmatter
+
+const dateObj = new Date(date)
+---
+
+<MarkdownLayout {...Astro.props}>
+    <BlogTitle title={title} date={dateObj} />
+    <slot />
+</MarkdownLayout>

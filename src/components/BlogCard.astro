@@ -1,0 +1,27 @@
+---
+import type { MarkdownInstance } from 'astro'
+import type { BlogFrontmatter } from '../lib/types'
+import BlogTitle from './BlogTitle.astro'
+
+interface Props {
+    post: MarkdownInstance<BlogFrontmatter<Date>>
+    titleTag?: 'h1' | 'h2' | 'h3'
+}
+
+const { post, titleTag = 'h2' } = Astro.props
+---
+
+<a href={post.url} class="group block w-full p-5 border rounded-lg">
+    <BlogTitle
+        title={post.frontmatter.title}
+        date={post.frontmatter.date}
+        titleClass="text-gray-600 group-hover:text-black dark:text-white dark:group-hover:text-gray-300"
+        titleTag={titleTag}
+    />
+    <p
+        class="text-gray-600 group-hover:text-black dark:text-white dark:group-hover:text-gray-300 my-5"
+    >
+        {post.frontmatter.description}
+    </p>
+    <p>Read post</p>
+</a>

@@ -1,0 +1,98 @@
+---
+import type { MarkdownInstance } from 'astro'
+import type { Navigation, Frontmatter } from '../lib/types'
+import { LinkClass } from '../lib/common'
+import { Icon } from 'astro-icon/components'
+
+function hasNavigation(
+    page: MarkdownInstance<Frontmatter<Navigation | undefined>>
+): page is MarkdownInstance<Frontmatter<Navigation>> {
+    return page.frontmatter.navigation !== undefined
+}
+
+function isNotNull<T>(value: T | null): value is T {
+    return value !== null
+}
+
+function classForLink(url: string | undefined): LinkClass {
+    return url && Astro.url.pathname.startsWith(url)
+        ? LinkClass.Active
+        : LinkClass.Default
+}
+
+const markdownPages =
+    await Astro.glob<Frontmatter<Navigation | undefined>>('/src/pages/*.md')
+
+const htmlImports = import.meta.glob('/src/pages/*.astro', {
+    import: 'navigation',
+})
+
+const htmlPages = (
+    await Promise.all(
+        Object.entries(htmlImports).map(async ([path, promise]) => {
+            const navigation = (await promise()) as Navigation | undefined
+
+            const url = path.replace('/src/pages', '').replace('.astro', '')
+
+            return navigation
+                ? {
+                      url,
+                      class: classForLink(url),
+                      ...navigation,
+                  }
+                : null
+        })
+    )
+).filter(isNotNull)
+
+const navigation = markdownPages
+    .filter(hasNavigation)
+    .map((page) => ({
+        url: page.url,
+        title: page.frontmatter.navigation.title,
+        order: page.frontmatter.navigation.order,
+        class: classForLink(page.url),
+    }))
+    .concat(htmlPages)
+    .sort((a, b) => a.order - b.order)
+
+const socialMedia = [
+    {
+        url: 'https://github.com/Zollerboy1',
+        icon: 'mdi:github',
+        title: 'GitHub',
+    },
+]
+---
+
+<header class="w-full mb-5" id="header">
+    <nav
+        class="w-full max-w-screen-lg mx-auto p-5 flex items-center justify-between"
+    >
+        <a href="/" class={`text-xl font-bold ${LinkClass.Active}`}>
+            Josef Zoller
+        </a>
+        <ul class="inline-flex items-center gap-5">
+            {
+                navigation.map((page) => (
+                    <li>
+                        <a href={page.url} class={page.class}>
+                            {page.title}
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+        <ul class="inline-flex items-center gap-5">
+            {
+                socialMedia.map(({ url, icon, title }) => (
+                    <li>
+                        <a href={url} class={`text-lg ${LinkClass.Default}`}>
+                            <Icon name={icon} title={title} />
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+    </nav>
+</header>

@@ -1,0 +1,20 @@
+---
+import type { MarkdownInstance } from 'astro'
+import type { BlogFrontmatter } from '../lib/types'
+import BlogCard from './BlogCard.astro'
+
+interface Props {
+    posts: MarkdownInstance<BlogFrontmatter<Date>>[]
+    titleTag?: 'h1' | 'h2' | 'h3'
+}
+
+const { posts, titleTag = 'h2' } = Astro.props
+---
+
+{
+    posts.length > 0 ? (
+        posts.map((post) => <BlogCard post={post} titleTag={titleTag} />)
+    ) : (
+        <p class="text-gray-500">There are no posts yet. Stay tuned...</p>
+    )
+}

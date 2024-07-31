@@ -1,0 +1,30 @@
+---
+import type { Navigation } from '../lib/types'
+import { getBlogPosts } from '../lib/blog'
+import BaseLayout from '../layouts/BaseLayout.astro'
+import BlogCards from '../components/BlogCards.astro'
+
+export const navigation: Navigation = {
+    title: 'Blog',
+    order: 3,
+}
+
+const blogPosts = await getBlogPosts(5)
+---
+
+<BaseLayout title="Blog">
+    <h1>Blog</h1>
+    <BlogCards posts={blogPosts} />
+    {
+        blogPosts.length > 0 && (
+            <div class="w-full flex items-center justify-center mt-5">
+                <a
+                    href="/blog/1"
+                    class="border rounded p-1.5 text-gray-600 hover:text-black dark:text-white dark:hover:text-gray-300"
+                >
+                    All posts
+                </a>
+            </div>
+        )
+    }
+</BaseLayout>

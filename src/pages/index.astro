@@ -1,0 +1,14 @@
+---
+import { getBlogPosts } from '../lib/blog'
+import BaseLayout from '../layouts/BaseLayout.astro'
+import BlogCards from '../components/BlogCards.astro'
+import { Content } from '../components/index.md'
+
+const blogPosts = await getBlogPosts(3)
+---
+
+<BaseLayout title="Home">
+    <Content />
+    <h2>Latest Blog Posts</h2>
+    <BlogCards posts={blogPosts} titleTag="h3" />
+</BaseLayout>
